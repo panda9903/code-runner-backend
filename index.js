@@ -1,8 +1,11 @@
 import connection from "./db/connection.js";
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -22,12 +25,12 @@ app.get("/submissions", (req, res) => {
 });
 
 app.post("/submissions", (req, res) => {
-  console.log(req);
+  //console.log(req);
   console.log(req.body);
-  const { code, code_language, stdin } = req.body;
+  const { code, code_language, stdin, username } = req.body;
   connection.query(
-    "INSERT INTO code_submissions (code, code_language, stdin) VALUES (?, ?, ?)",
-    [code, code_language, stdin],
+    "INSERT INTO code_submissions (code, code_language, stdin, username) VALUES (?, ?, ?, ?)",
+    [code, code_language, stdin, username],
     (err, results) => {
       if (err) {
         console.error("Error inserting submission: " + err.stack);
