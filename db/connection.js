@@ -11,8 +11,9 @@ var connection = createConnection({
 connection.connect(function (err) {
   if (err) {
     console.error("Database connection failed: " + err.stack);
+  } else {
+    console.log("Connected!");
   }
-  console.log("Connected!");
 });
 
 export default connection;
