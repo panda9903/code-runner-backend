@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
+setInterval(function () {
+  connection.query("SELECT 1");
+}, 60000);
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
